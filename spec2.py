@@ -43,7 +43,7 @@ def getimage(title, specs, timestep, speciesfile, svgfile):
         for i in range(10):
             s = s.replace(str(i), f"_{{{i}}}")
         for i in range(10):
-            s = s.replace(f"{i}}}_{{",str(i))
+            s = s.replace(f"{i}}}_{{", str(i))
         return s
 
     labels = [sub(f"$\mathrm{{{s}}}$") for s in specs]
@@ -60,10 +60,11 @@ def getimage(title, specs, timestep, speciesfile, svgfile):
                  (np.floor(np.max(n))+0.5)*0.8, figureno[ii])
         if ii == len(specs)-1:
             plt.xlabel("Time (ps)")
-            plt.yticks(range(0,int(np.max(n))+1,math.ceil(np.max(n)/4)))
+            plt.yticks(range(0, int(np.max(n))+1, math.ceil(np.max(n)/4)))
         else:
             plt.xticks([])
-            plt.yticks(range(int(np.max(n))//4, int(np.max(n))+1,math.ceil(np.max(n)/4)))
+            plt.yticks(range(int(np.max(n))//4, int(np.max(n)) +
+                             1, math.ceil(np.max(n)/4)))
         plt.legend(frameon=False, loc=1)
     plt.tight_layout()
     plt.subplots_adjust(wspace=0, hspace=0)
@@ -76,8 +77,9 @@ def getimage(title, specs, timestep, speciesfile, svgfile):
 
 
 if __name__ == '__main__':
-    getimage("Methane", ['CH3', 'CH3O','CHO','HO2','HO'], 0.1/1000, "speciesnvt_ch4.txt", "species4.svg")
-    #getimage("RP-3", [
+    getimage("Methane", ['CH3', 'CH3O', 'CHO', 'HO2', 'HO'],
+             0.1/1000, "speciesnvt_ch4.txt", "species4.svg")
+    # getimage("RP-3", [
     #        'C2H4','CH2O','C2H5O','CH3','HO2','HO'
     #        ],
     #         0.1/1000, "speciesnvt_rp3.txt", "species3.svg")
