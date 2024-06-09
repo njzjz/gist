@@ -14,5 +14,5 @@ jobs:
         python-version: "3.x"
     - run: pip install uv
     - run: |
-        uv venv /venv-test-x86_64 --python=python
+        uv venv ./venv-test-x86_64 --python=python
         uv pip install --python-platform x86_64-apple-darwin -v numpy
