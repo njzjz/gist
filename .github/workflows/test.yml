@@ -13,5 +13,6 @@ jobs:
       with:
         python-version: "3.x"
     - run: pip install uv
-    - run: wget https://files.pythonhosted.org/packages/06/e6/65ed9b1ebb8f36f31e7e2d319832645db4e849f855e5a71e427d621592bf/mddatasetbuilder-1.3.9-cp37-abi3-macosx_10_9_universal2.whl
-    - run: uv pip install --system --python-platform x86_64-apple-darwin -v ./mddatasetbuilder-1.3.9-cp37-abi3-macosx_10_9_universal2.whl
+    - run: |
+        uv venv /venv-test-x86_64 --python=python
+        uv pip install --python-platform x86_64-apple-darwin -v numpy
