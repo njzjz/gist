@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  test:
+    name: test windows wheel
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+    - run: pip install scipy
+    - run: python -c "import scipy.special, numpy as np;print(scipy.special.eval_hermite(np.arange(2), np.zeros((1,2), dtype=int)))"
