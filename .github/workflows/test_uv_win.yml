@@ -1,0 +1,11 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  test:
+    name: test windows uv
+    runs-on: windows-latest
+    steps:
+    - run: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
