@@ -1,0 +1,145 @@
+on:
+  push:
+
+jobs:
+  # Cache files `cache-file-runner` and `cache-file-container`
+  cache-file-runner:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Create cache-file
+        run: |
+          touch cache-file-runner
+          echo "I am in ubuntu-latest-runner cache" > cache-file-runner
+      - uses: actions/cache/save@v4
+        with:
+          path: cache-file-runner
+          key: ${{ github.sha }}-cache-file-runner
+          enableCrossOsArchive: true
+
+  cache-file-container:
+    runs-on: ubuntu-22.04
+    container:
+      image: ubuntu:22.04
+    steps:
+      - name: Create cache-file
+        run: |
+          touch cache-file-container
+          echo "I am in ubuntu-latest-container cache" > cache-file-container
+      - uses: actions/cache/save@v4
+        with:
+          path: cache-file-container
+          key: ${{ github.sha }}-cache-file-container
+          enableCrossOsArchive: true
+
+  # Read each of the cache files from the runner
+  runner-read-runner-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-runner
+          key: ${{ github.sha }}-cache-file-runner
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-runner" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+          fi
+
+  runner-read-container-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-container
+          key: ${{ github.sha }}-cache-file-container
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-container" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+          fi
+
+  # Read each of the cache files from the container
+  container-read-runner-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    container:
+      image: ubuntu:22.04
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-runner
+          key: ${{ github.sha }}-cache-file-runner
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-runner" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+          fi
+
+  container-read-container-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    container:
+      image: ubuntu:22.04
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-container
+          key: ${{ github.sha }}-cache-file-container
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-container" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+          fi
+          
+  # CrossOs access
+  runner-crossOS-read-container-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-container
+          key: ${{ github.sha }}-cache-file-container
+          enableCrossOsArchive: true
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-container" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+          fi
+
+  container-crossOS-read-runner-cache:
+    runs-on: ubuntu-22.04
+    needs: ["cache-file-runner", "cache-file-container"]
+    container:
+      image: ubuntu:22.04
+    steps:
+      - uses: actions/cache/restore@v4
+        with:
+          path: cache-file-runner
+          key: ${{ github.sha }}-cache-file-runner
+          enableCrossOsArchive: true
+      - name: Check cache-file
+        run: |
+          if [ -f "cache-file-runner" ]
+          then
+            echo "Found cached file"
+          else
+            echo "Cache not restored"
+         fi
