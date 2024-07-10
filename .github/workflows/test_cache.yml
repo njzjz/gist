@@ -27,7 +27,7 @@ jobs:
           echo "I am in ubuntu-latest-container cache" > cache-file-container
       - uses: actions/cache/save@v4
         with:
-          path: cache-file-container
+          path: ./cache-file-container
           key: ${{ github.sha }}-cache-file-container
           enableCrossOsArchive: true
 
@@ -55,7 +55,7 @@ jobs:
     steps:
       - uses: actions/cache/restore@v4
         with:
-          path: cache-file-container
+          path: ./cache-file-container
           key: ${{ github.sha }}-cache-file-container
       - name: Check cache-file
         run: |
@@ -94,7 +94,7 @@ jobs:
     steps:
       - uses: actions/cache/restore@v4
         with:
-          path: cache-file-container
+          path: ./cache-file-container
           key: ${{ github.sha }}-cache-file-container
       - name: Check cache-file
         run: |
@@ -112,7 +112,7 @@ jobs:
     steps:
       - uses: actions/cache/restore@v4
         with:
-          path: cache-file-container
+          path: ./cache-file-container
           key: ${{ github.sha }}-cache-file-container
           enableCrossOsArchive: true
       - name: Check cache-file
