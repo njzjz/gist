@@ -13,4 +13,4 @@ jobs:
       with:
         python-version: "3.x"
     - run: pip install netCDF4
-    - run: python -m "import netCDF4"
+    - run: python -c "import netCDF4"
