@@ -6,11 +6,14 @@ on:
 jobs:
   test:
     name: test windows wheel
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
       with:
         python-version: "3.x"
-    - run: pip install scipy
-    - run: python -c "import scipy.special, numpy as np;print(scipy.special.eval_hermite(2, np.zeros((1,2), dtype=int)))"
+    - run: pip install openbabel-wheel
+    - run: python -c "from openbabel import openbabel;ff = openbabel.OBForceField.FindType('mmff94');ff.DiverseConfGen(0.5, 100000, 50)"
