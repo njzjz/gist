@@ -16,4 +16,4 @@ jobs:
       with:
         python-version: "3.x"
     - run: pip install openbabel-wheel
-    - run: python -c "from openbabel import openbabel;ff = openbabel.OBForceField.FindType('mmff94');ff.DiverseConfGen(0.5, 100000, 50)"
+    - run: python -c "from openbabel import openbabel;ff = openbabel.OBForceField.FindType('mmff94');print(ff.__dict__)"
