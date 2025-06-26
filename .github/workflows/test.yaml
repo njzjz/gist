@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/setup-python@v5
       with:
-        python-version: '3.13'
-    - run: pip install mpich mpi4py
+        python-version: '3.13'    
+    - uses: mpi4py/setup-mpi@v1
+    - run: pip install mpi4py
     - run: python -c "import mpi4py"
